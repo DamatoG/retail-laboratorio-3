@@ -9,9 +9,6 @@ public class Category {
     private String description_category;
     private ArrayList <Product> list_product = new ArrayList<>();
 
-    public Category() {
-        this.name_category = name_category;
-    }
 
     public String getId_category() {
         return id_category;

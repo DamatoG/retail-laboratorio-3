@@ -57,6 +57,7 @@ public class ProductBusinessImple implements BusinessProduct {
         Category c = categoryDao.findCategoryByName(productoDao.findProductById(id).getCategory_name());
         if (c != null) {
             c.removeProductToCategory(productoDao.findProductById(id));
+            productoDao.deleteProduct(id);
         }
         this.productoDao.deleteProduct(id);
         return true;

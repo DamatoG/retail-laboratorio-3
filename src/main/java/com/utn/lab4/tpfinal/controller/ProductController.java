@@ -45,7 +45,7 @@ public class ProductController {
 //    }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> crearProducto(@RequestBody AltaProductDto dto){
+    public ResponseEntity<Object> createProduct(@RequestBody AltaProductDto dto){
         if (dto.getName() == null || dto.getType() == null || dto.getDescription() == null || dto.getBrand() == null){
             throw  new BadRequestException("Los campos name, type, description y brand son obligatorios");
         }

@@ -1,5 +1,6 @@
 package com.utn.lab4.tpfinal.persistence.dao;
 
+import ch.qos.logback.core.BasicStatusManager;
 import com.utn.lab4.tpfinal.model.Product;
 import com.utn.lab4.tpfinal.persistence.dao.implementacion.InMemoryProductDao;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class InMemoryProductDaoTest{

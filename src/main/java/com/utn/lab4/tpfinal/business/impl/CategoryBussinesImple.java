@@ -2,6 +2,7 @@ package com.utn.lab4.tpfinal.business.impl;
 
 import com.utn.lab4.tpfinal.business.BussinesCategory;
 import com.utn.lab4.tpfinal.dto.AltaCategoryDto;
+import com.utn.lab4.tpfinal.exception.BadRequestException;
 import com.utn.lab4.tpfinal.model.Category;
 import com.utn.lab4.tpfinal.persistence.dao.implementacion.InMemoryCategoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class CategoryBussinesImple implements BussinesCategory {
     public Category createCategory(AltaCategoryDto categoryDto) {
 
         Category newCategory = new Category();
+        if (dao.findCategoryByName(categoryDto.getName_category()) != null){
+            throw new BadRequestException("Ya existe un nombre con esa categoria");
+        }
         newCategory.setName_category(categoryDto.getName_category());
         newCategory.setDescription_category(categoryDto.getDescription_category());
         return dao.createCategory(newCategory);

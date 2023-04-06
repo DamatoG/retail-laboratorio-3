@@ -39,9 +39,9 @@ public class CategoryController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createCategory(@RequestBody AltaCategoryDto dto){
+    public ResponseEntity<Object> createCategory(@RequestBody AltaCategoryDto dto) {
         if (dto.getName_category() == null || dto.getDescription_category() == null ){
-            throw  new BadRequestException("Los campos name, description son obligatorios");
+            throw new BadRequestException("Los campos name, description son obligatorios");
         }
         return ResponseHandler.generateResponse("La categoria fue creado con exito", HttpStatus.CREATED, bussinesCategory.createCategory(dto) );
 

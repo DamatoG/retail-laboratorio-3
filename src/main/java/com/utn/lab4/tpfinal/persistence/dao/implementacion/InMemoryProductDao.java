@@ -5,12 +5,15 @@ import com.utn.lab4.tpfinal.persistence.dao.ProductDao;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
 
 @Component
 public class InMemoryProductDao implements ProductDao {
+
 
     private ArrayList <Product> productList = new ArrayList<>();
 
@@ -44,20 +47,18 @@ public class InMemoryProductDao implements ProductDao {
 
     @Override
     public Product updateProduct(Product p) {
-        for (Product product: productList){
-            if (product.getId_product() == p.getId_product()){
-                product.setDescription_product(p.getDescription_product());
-                product.setAtributes(p.getAtributes());
-                product.setBrand(p.getBrand());
-                product.setCategory_name(p.getCategory_name());
-                product.setPrice(p.getPrice());
-                product.setType(p.getType());
-
-                return product;
+        Product productActualizable = findProductById(p.getId_product());
+            if (productActualizable != null){
+                productActualizable.setName_product(p.getName_product());
+                productActualizable.setDescription_product(p.getDescription_product());
+                productActualizable.setAtributes(p.getAtributes());
+                productActualizable.setBrand(p.getBrand());
+                productActualizable.setCategory_name(p.getCategory_name());
+                productActualizable.setPrice(p.getPrice());
+                productActualizable.setType(p.getType());
             }
-        }
-        return null;
-    }
+        return productActualizable;
+    };
 
     @Override
     public boolean deleteProduct(String id) {
@@ -79,4 +80,20 @@ public class InMemoryProductDao implements ProductDao {
     public ArrayList<Product> findAll() {
         return productList;
     }
+
+    public List<Product> filtrarProducts(String type, String brand, String category) {
+        ArrayList<Product> productsFiltrados = new ArrayList<>();
+
+//        if (type != null){
+//            this.productList.stream().filter(product -> (product.getType().equals(type)));
+//        }
+        System.out.println("FILTRANDO DENTRO DE PERSISTENCIA");
+
+       return productList.stream()
+               .filter(product ->
+                       (type == null || product.getType().equals(type)) &&
+                       (brand == null || product.getBrand().equals(brand)) &&
+                       (category == null || product.getCategory_name().equals(category))
+               ).collect(Collectors.toList());
+}
 }

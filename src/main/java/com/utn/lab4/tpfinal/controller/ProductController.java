@@ -65,10 +65,28 @@ public class ProductController {
 
     };
 
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> updateProduct(@PathVariable String id, @RequestBody Product p){
+        System.out.println(id + " controler");
 
+        businessProduct.updateProduct(id, p);
+
+        return ResponseHandler.generateResponse("El producto "+ id + " fue actualizado con exito", HttpStatus.OK, p);
+    }
     /*@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Product crearProduct(@RequestBody AltaProductDto dto){
         return this.businessProduct.createProduct(dto);
     }*/
+
+    @GetMapping("/filter")
+    public ResponseEntity<Object> getProductByAtribute(
+            @RequestParam(name = "tipo_producto", required = false) String tipoProducto,
+            @RequestParam(name = "marca", required = false) String marca,
+            @RequestParam(name = "categoria", required = false) String categoria
+    ){
+
+
+        return ResponseHandler.generateResponse("Datos recuperados con exito", HttpStatus.OK, businessProduct.getProductsByAttribute(tipoProducto, marca, categoria));
+    };
 
 }

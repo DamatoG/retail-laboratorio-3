@@ -46,5 +46,7 @@ public class CategoryController {
         return ResponseHandler.generateResponse("La categoria fue creado con exito", HttpStatus.CREATED, bussinesCategory.createCategory(dto) );
 
     }
+
+
 }
 

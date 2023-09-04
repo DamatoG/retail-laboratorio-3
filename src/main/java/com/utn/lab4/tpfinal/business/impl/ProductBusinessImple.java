@@ -3,7 +3,6 @@ package com.utn.lab4.tpfinal.business.impl;
 import com.utn.lab4.tpfinal.business.BusinessProduct;
 import com.utn.lab4.tpfinal.dto.AltaProductDto;
 import com.utn.lab4.tpfinal.exception.BadRequestException;
-import com.utn.lab4.tpfinal.exception.RegistroNotFoundException;
 import com.utn.lab4.tpfinal.model.Category;
 import com.utn.lab4.tpfinal.model.Product;
 import com.utn.lab4.tpfinal.persistence.dao.CategoryDao;
@@ -11,9 +10,8 @@ import com.utn.lab4.tpfinal.persistence.dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.management.BadAttributeValueExpException;
 import java.util.ArrayList;
-import java.util.UUID;
+import java.util.List;
 
 @Component
 public class ProductBusinessImple implements BusinessProduct {
@@ -48,9 +46,13 @@ public class ProductBusinessImple implements BusinessProduct {
     }
 
     @Override
-    public Product updateProduct(AltaProductDto dto) {
-        return null;
-    }
+    public Product updateProduct(String id, Product p) {
+        if (productoDao.findProductById(id) == null){
+            throw new BadRequestException("El producto con id "+p.getId_product()+" no existe");
+        }
+        p.setId_product(id);
+        return this.productoDao.updateProduct(p);
+    };
 
     @Override
     public boolean deleteProduct(String id) {
@@ -61,7 +63,6 @@ public class ProductBusinessImple implements BusinessProduct {
         }
         this.productoDao.deleteProduct(id);
         return true;
-
     }
 
     @Override
@@ -70,8 +71,11 @@ public class ProductBusinessImple implements BusinessProduct {
     }
 
     @Override
-    public ArrayList<Product> getProductsByAttribute() {
-        return null;
+    public List<Product> getProductsByAttribute(String type, String brand, String category) {
+        System.out.println(this.productoDao.filtrarProducts(type, brand, category));
+        System.out.println("FILTRANDO DENTRO DE BUSSINES");
+        return this.productoDao.filtrarProducts(type, brand, category);
+
     }
 
     @Override

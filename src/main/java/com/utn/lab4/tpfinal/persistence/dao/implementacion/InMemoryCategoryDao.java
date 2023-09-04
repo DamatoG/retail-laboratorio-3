@@ -11,6 +11,7 @@ import java.util.UUID;
 @Component
 public class InMemoryCategoryDao implements CategoryDao {
 
+    Category c1 = new Category();
     private ArrayList <Category> categoriyList = new ArrayList<>();
 
 

@@ -4,6 +4,7 @@ import com.utn.lab4.tpfinal.dto.AltaProductDto;
 import com.utn.lab4.tpfinal.model.Product;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface BusinessProduct {
 
@@ -11,7 +12,7 @@ public interface BusinessProduct {
     Product createProduct(AltaProductDto dto);
 
     //Actualizar producto
-    Product updateProduct(AltaProductDto dto);
+    Product updateProduct(String id, Product p);
 
     //Eliminar producto
     boolean deleteProduct(String id);
@@ -20,7 +21,7 @@ public interface BusinessProduct {
      Product getProduct(String id);
 
     //Consultar productos segun atributo
-    ArrayList<Product> getProductsByAttribute();
+    List<Product> getProductsByAttribute(String type, String brand, String category);
 
 
     ArrayList<Product> getAllProducts();

@@ -4,10 +4,8 @@ import com.utn.lab4.tpfinal.business.impl.ProductBusinessImple;
 import com.utn.lab4.tpfinal.dto.AltaProductDto;
 import com.utn.lab4.tpfinal.model.Category;
 import com.utn.lab4.tpfinal.model.Product;
-import com.utn.lab4.tpfinal.model.ProductType;
 import com.utn.lab4.tpfinal.persistence.dao.CategoryDao;
 import com.utn.lab4.tpfinal.persistence.dao.ProductDao;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static com.utn.lab4.tpfinal.model.ProductType.televisores;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -41,7 +38,7 @@ public class ProductBusinessTest {
 
 
         Category c = new Category();
-        c.setName_category("Otros");
+        c.setNameCategory("Otros");
 
         Product p = new Product("Samsung S24", celulares, "Celular s23", "Otros", "celulares");
         AltaProductDto productoEsperado = new AltaProductDto("Samsung S24", celulares, "Celular s23", "Otros", "celulares");
@@ -51,10 +48,10 @@ public class ProductBusinessTest {
 
         Product resultProduct = implementation.createProduct(productoEsperado);
 
-        assertEquals(productoEsperado.getName(), resultProduct.getName_product());
+        assertEquals(productoEsperado.getName(), resultProduct.getNameProduct());
         assertEquals(productoEsperado.getBrand(), resultProduct.getBrand());
         assertEquals(productoEsperado.getType(), resultProduct.getType());
-        assertEquals(productoEsperado.getCategory_name(), resultProduct.getCategory_name());
+        assertEquals(productoEsperado.getCategory_name(), resultProduct.getCategoryName());
 
     }
 
@@ -65,7 +62,7 @@ public class ProductBusinessTest {
         Mockito.when(productDaoMock.deleteProduct(Mockito.any())).thenReturn(true);
         Mockito.when(productDaoMock.findProductById(Mockito.<String>any())).thenReturn(p);
 
-        assertTrue(implementation.deleteProduct(p.getId_product()));
+        assertTrue(implementation.deleteProduct(p.getIdProduct()));
     }
 
 }

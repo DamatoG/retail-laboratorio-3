@@ -10,35 +10,35 @@ public class Category {
     private ArrayList <Product> list_product = new ArrayList<>();
 
 
-    public String getId_category() {
+    public String getIdCategory() {
         return id_category;
     }
 
-    public void setId_category(String id_category) {
+    public void setIdCategory(String id_category) {
         this.id_category = id_category;
     }
 
-    public String getName_category() {
+    public String getNameCategory() {
         return name_category;
     }
 
-    public void setName_category(String name_category) {
+    public void setNameCategory(String name_category) {
         this.name_category = name_category;
     }
 
-    public String getDescription_category() {
+    public String getDescriptionCategory() {
         return description_category;
     }
 
-    public void setDescription_category(String description_category) {
+    public void setDescriptionCategory(String description_category) {
         this.description_category = description_category;
     }
 
-    public ArrayList<Product> getList_product() {
+    public ArrayList<Product> getListProduct() {
         return list_product;
     }
 
-    public void setList_product(ArrayList<Product> list_product) {
+    public void setListProduct(ArrayList<Product> list_product) {
         this.list_product = list_product;
     }
 

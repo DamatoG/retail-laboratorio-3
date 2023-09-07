@@ -13,7 +13,7 @@ public class Product {
     private Map <String, String> atributes;
     private ProductType type;
 
-    public Product(){};
+    public Product(){}
     public Product(String name_product, String category_name, String brand, int price) {
         this.name_product = name_product;
         this.category_name = category_name;
@@ -29,27 +29,27 @@ public class Product {
         this.brand = brand;
     }
 
-    public String getId_product() {
+    public String getIdProduct() {
         return id_product;
     }
 
-    public void setId_product(String id_product) {
+    public void setIdProduct(String id_product) {
         this.id_product = id_product;
     }
 
-    public String getDescription_product() {
+    public String getDescriptionProduct() {
         return description_product;
     }
 
-    public void setDescription_product(String description_product) {
+    public void setDescriptionProduct(String description_product) {
         this.description_product = description_product;
     }
 
-    public String getCategory_name() {
+    public String getCategoryName() {
         return category_name;
     }
 
-    public void setCategory_name(String category_name) {
+    public void setCategoryName(String category_name) {
         this.category_name = category_name;
     }
 
@@ -85,11 +85,11 @@ public class Product {
         this.type = type;
     }
 
-    public String getName_product() {
+    public String getNameProduct() {
         return name_product;
     }
 
-    public void setName_product(String name_product) {
+    public void setNameProduct(String name_product) {
         this.name_product = name_product;
     }
 

@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 
 @RestController
 @RequestMapping ("/products") //Indica la url base
@@ -24,16 +23,13 @@ public class ProductController {
     //Consultar todos los productos existentes
     @GetMapping()
     public ResponseEntity<Object> getProducts (){
-        businessProduct.getAllProducts();
-        ArrayList<Product> products;
         return ResponseHandler.generateResponse("Datos recuperados con exito", HttpStatus.OK, businessProduct.getAllProducts());
     }
 
     //Consultar producto por su id
     @GetMapping("/{id}")
     public ResponseEntity<Object> getProducto(@PathVariable String id) {
-        Product producto = null;
-        producto = businessProduct.getProduct(id);
+        Product producto = businessProduct.getProduct(id);
         if (producto == null) {
             throw new RegistroNotFoundException("El producto con id " + id + "no existe");
         }
@@ -46,7 +42,8 @@ public class ProductController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createProduct(@RequestBody AltaProductDto dto){
-        if (dto.getName() == null || dto.getType() == null || dto.getDescription() == null || dto.getBrand() == null){
+        if (dto.getName() == null || dto.getType() == null || dto.getDescription() == null || dto.getBrand() == null
+        ){
             throw  new BadRequestException("Los campos name, type, description y brand son obligatorios");
         }
         return ResponseHandler.generateResponse("El producto fue creado con exito", HttpStatus.CREATED, businessProduct.createProduct(dto) );
@@ -63,7 +60,7 @@ public class ProductController {
         businessProduct.deleteProduct(id);
         return ResponseHandler.generateResponse("el producto se elimino correctamente", HttpStatus.OK, null);
 
-    };
+    }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> updateProduct(@PathVariable String id, @RequestBody Product p){
@@ -84,8 +81,6 @@ public class ProductController {
             @RequestParam(name = "marca", required = false) String marca,
             @RequestParam(name = "categoria", required = false) String categoria
     ){
-
-
         return ResponseHandler.generateResponse("Datos recuperados con exito", HttpStatus.OK, businessProduct.getProductsByAttribute(tipoProducto, marca, categoria));
     };
 

@@ -4,6 +4,7 @@ import com.utn.lab4.tpfinal.business.BussinesCategory;
 import com.utn.lab4.tpfinal.dto.AltaCategoryDto;
 import com.utn.lab4.tpfinal.exception.BadRequestException;
 import com.utn.lab4.tpfinal.model.Category;
+import com.utn.lab4.tpfinal.model.Product;
 import com.utn.lab4.tpfinal.persistence.dao.implementacion.InMemoryCategoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,14 +24,14 @@ public class CategoryBussinesImple implements BussinesCategory {
         if (dao.findCategoryByName(categoryDto.getName_category()) != null){
             throw new BadRequestException("Ya existe un nombre con esa categoria");
         }
-        newCategory.setName_category(categoryDto.getName_category());
-        newCategory.setDescription_category(categoryDto.getDescription_category());
+        newCategory.setNameCategory(categoryDto.getName_category());
+        newCategory.setDescriptionCategory(categoryDto.getDescription_category());
         return dao.createCategory(newCategory);
     }
 
     @Override
     public Category updateCategory(Category c) {
-        if (dao.findCategoryById(c.getId_category()) != null) {
+        if (dao.findCategoryById(c.getIdCategory()) != null) {
             dao.updateCategory(c);
             return c;
         } else {
@@ -53,5 +54,10 @@ public class CategoryBussinesImple implements BussinesCategory {
     @Override
     public ArrayList<Category> getAllCategories() {
         return dao.findAllCategory();
+    }
+
+    @Override
+    public ArrayList<Product> orderByPrice(String id, String order_price) {
+        return dao.orderByPrice(id, order_price);
     }
 }

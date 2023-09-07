@@ -29,17 +29,18 @@ public class ProductBusinessImple implements BusinessProduct {
     @Override
     public Product createProduct(AltaProductDto dto) {
         Product product = new Product();
-        product.setName_product(dto.getName());
+        product.setNameProduct(dto.getName());
         product.setType(dto.getType());
-        product.setDescription_product(dto.getDescription());
+        product.setDescriptionProduct(dto.getDescription());
         product.setBrand(dto.getBrand());
-        product.setCategory_name(dto.getCategory_name());
+        product.setCategoryName(dto.getCategory_name());
+        product.setPrice(dto.getPrice());
 
         Category c = categoryDao.findCategoryByName(dto.getCategory_name());
         if (c == null){
             //c = categoryDao.findCategoryByName("Otros");
             throw new BadRequestException("La categoria seleccionada no existe. Las categorias disponibles son: " + categoryDao.getCategoriesNames().toString());
-        };
+        }
 
         c.addProductToCategory(product);
         return this.productoDao.save(product);
@@ -48,15 +49,15 @@ public class ProductBusinessImple implements BusinessProduct {
     @Override
     public Product updateProduct(String id, Product p) {
         if (productoDao.findProductById(id) == null){
-            throw new BadRequestException("El producto con id "+p.getId_product()+" no existe");
+            throw new BadRequestException("El producto con id "+p.getIdProduct()+" no existe");
         }
-        p.setId_product(id);
+        p.setIdProduct(id);
         return this.productoDao.updateProduct(p);
-    };
+    }
 
     @Override
     public boolean deleteProduct(String id) {
-        Category c = categoryDao.findCategoryByName(productoDao.findProductById(id).getCategory_name());
+        Category c = categoryDao.findCategoryByName(productoDao.findProductById(id).getCategoryName());
         if (c != null) {
             c.removeProductToCategory(productoDao.findProductById(id));
             productoDao.deleteProduct(id);
@@ -73,7 +74,6 @@ public class ProductBusinessImple implements BusinessProduct {
     @Override
     public List<Product> getProductsByAttribute(String type, String brand, String category) {
         System.out.println(this.productoDao.filtrarProducts(type, brand, category));
-        System.out.println("FILTRANDO DENTRO DE BUSSINES");
         return this.productoDao.filtrarProducts(type, brand, category);
 
     }

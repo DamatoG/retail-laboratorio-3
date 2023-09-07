@@ -9,17 +9,19 @@ public class AltaProductDto {
     private String description;
     private String category_name;
     private String brand;
+    private int price;
 
 
-    public AltaProductDto(String name, ProductType type, String description, String category_name, String brand) {
+    public AltaProductDto(String name, ProductType type, String description, String category_name, String brand, int price) {
         this.name = name;
         this.type = type;
         this.description = description;
         this.brand = brand;
         this.category_name = category_name;
+        this.price = price;
     }
 
-    public AltaProductDto(){};
+    public AltaProductDto(){}
 
     public String getName() {
         return name;
@@ -60,4 +62,8 @@ public class AltaProductDto {
     public void setBrand(String brand) {
         this.brand = brand;
     }
+
+    public int getPrice() {return price;}
+
+    public void setPrice(int price) {this.price = price;}
 }

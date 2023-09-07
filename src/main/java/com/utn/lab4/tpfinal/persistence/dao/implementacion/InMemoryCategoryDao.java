@@ -5,19 +5,17 @@ import com.utn.lab4.tpfinal.model.Product;
 import com.utn.lab4.tpfinal.persistence.dao.CategoryDao;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class InMemoryCategoryDao implements CategoryDao {
 
-    Category c1 = new Category();
     private ArrayList <Category> categoriyList = new ArrayList<>();
 
 
     @Override
     public Category createCategory(Category c) {
-        c.setId_category(generarId());
+        c.setIdCategory(generarId());
         this.categoriyList.add(c);
         System.out.println("Se guardo la categoria correctamente");
         return c;
@@ -27,31 +25,27 @@ public class InMemoryCategoryDao implements CategoryDao {
         return UUID.randomUUID().toString().toUpperCase().substring(0,6);
     }
 
-    private ArrayList <Product> productList = new ArrayList<>();
 
     @Override
     public Category findCategoryById(String id) {
 
         for (Category c: categoriyList) {
             //System.out.println("La capa de persistenicia esta buscando el producto");
-            if (c.getId_category().equals(id)) {
+            if (c.getIdCategory().equals(id)) {
                 //System.out.println("Categoria encontrado");
                return c;
-            }else {System.out.println("No existe un producto con ese id");};
+            }else {System.out.println("No existe un producto con ese id");}
         }
         return null;
     }
 
 
-
-    ;
-
     @Override
     public Category updateCategory(Category category) {
         for (Category c: categoriyList){
-            if (c.getId_category() == category.getId_category()){
-                c.setDescription_category(category.getDescription_category());
-                c.setName_category(category.getName_category());
+            if (c.getIdCategory().equals( category.getIdCategory())){
+                c.setDescriptionCategory(category.getDescriptionCategory());
+                c.setNameCategory(category.getNameCategory());
 
                 return c;
             }
@@ -63,7 +57,7 @@ public class InMemoryCategoryDao implements CategoryDao {
     public boolean deleteCategory(String id) {
         System.out.println("capa de persistencia metodo delete");
         for (Category c: categoriyList){
-            if(c.getId_category().equals(id)){
+            if(c.getIdCategory().equals(id)){
                 System.out.println("Categoria eliminada");
                 categoriyList.remove(c);
                 return true;
@@ -77,10 +71,10 @@ public class InMemoryCategoryDao implements CategoryDao {
     public Category findCategoryByName(String name_category) {
         for (Category c: categoriyList) {
             //System.out.println("La capa de persistenicia esta buscando el producto");
-            if (c.getName_category().toLowerCase().equals(name_category.toLowerCase())) {
+            if (c.getNameCategory().toLowerCase().equals(name_category.toLowerCase())) {
                 //System.out.println("Categoria encontrado");
                 return c;
-            }else {System.out.println("No existe un producto con ese id");};
+            }else {System.out.println("No existe un producto con ese id");}
         }
         return null;
     }
@@ -90,8 +84,8 @@ public class InMemoryCategoryDao implements CategoryDao {
         ArrayList<String> categoriesNames = new ArrayList<>();
 
         for(Category c: categoriyList){
-            categoriesNames.add(c.getName_category());
-        };
+            categoriesNames.add(c.getNameCategory());
+        }
         return categoriesNames;
     }
 
@@ -100,5 +94,33 @@ public class InMemoryCategoryDao implements CategoryDao {
     @Override
     public ArrayList<Category> findAllCategory() {
         return categoriyList;
+    }
+
+    public ArrayList<Product> orderByPrice(String id, String order_price){
+        ArrayList<Product> listaOrdenada = new ArrayList<>();
+        //System.out.println(order_price);
+
+        for (Category c: categoriyList) {
+            if (c.getIdCategory().equals(id)){
+                listaOrdenada = c.getListProduct();
+
+                if (order_price.equals("asc")) {
+                    //System.out.println("asc antes de ordenar" + listaOrdenada);
+                    Collections.sort(listaOrdenada, Comparator.comparing(Product::getPrice));
+                    //System.out.println("asc desp de ordenar" + listaOrdenada);
+                }
+
+                else {
+                    //System.out.println("desc antes de ordenar" + listaOrdenada);
+
+                    Collections.sort(listaOrdenada, Comparator.comparing(Product::getPrice));
+                    Collections.reverse(listaOrdenada);
+                    //System.out.println("desc desp de ordenar" + listaOrdenada);
+                }
+            }
+
+        }
+
+        return listaOrdenada;
     }
 }

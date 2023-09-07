@@ -27,13 +27,12 @@ public class CategoryController {
                 bussinesCategory.getAllCategories());
     }
 
-    //Consultar producto por su id
+    //Consultar categoria por su id
     @GetMapping("/{id}")
     public ResponseEntity<Object> getCategorieById(@PathVariable String id) {
-        Category c = null;
-        c = bussinesCategory.getCategory(id);
+        Category c = bussinesCategory.getCategory(id);
         if (c == null) {
-            throw new RegistroNotFoundException("El producto con id " + id + "no existe");
+            throw new RegistroNotFoundException("El producto con id " + id + " no existe");
         }
         return ResponseHandler.generateResponse("Datos recuperados con exito", HttpStatus.OK, c);
     }
@@ -43,10 +42,18 @@ public class CategoryController {
         if (dto.getName_category() == null || dto.getDescription_category() == null ){
             throw new BadRequestException("Los campos name, description son obligatorios");
         }
-        return ResponseHandler.generateResponse("La categoria fue creado con exito", HttpStatus.CREATED, bussinesCategory.createCategory(dto) );
+        return ResponseHandler.generateResponse("La categoria fue creada con exito", HttpStatus.CREATED, bussinesCategory.createCategory(dto) );
 
     }
 
+
+    @GetMapping("/order/{id}")
+    public ResponseEntity<Object> orderBy(
+            @PathVariable String id,
+            @RequestParam(name = "order_by") String order_by
+    ){
+        return ResponseHandler.generateResponse("Datos recuperados con exito", HttpStatus.OK, bussinesCategory.orderByPrice(id, order_by));
+    };
 
 }
 

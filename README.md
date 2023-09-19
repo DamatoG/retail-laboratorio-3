@@ -21,3 +21,7 @@ materia.
 * GET /categories/order/1AC731?order_by="asc" (o "desc") --> Retornar producto de una categoria ordenando por precio ascendente o descendente
 * PUT /categories/id --> Modificar categoria
 * DELETE /categories/id --> Eliminar categoria
+
+
+###Documentación publica POSTMAN
+##https://documenter.getpostman.com/view/18076612/2s9YC8wr4Y

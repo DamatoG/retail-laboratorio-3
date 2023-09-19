@@ -1,6 +1,6 @@
 package com.utn.lab4.tpfinal.persistence.dao;
-import com.utn.lab4.tpfinal.model.Product;
-import com.utn.lab4.tpfinal.persistence.dao.implementacion.InMemoryProductDao;
+import com.utn.lab4.tpfinal.model.Category;
+import com.utn.lab4.tpfinal.persistence.dao.implementacion.InMemoryCategoryDao;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -8,17 +8,16 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class InMemoryProductDaoTest{
+public class InMemoryCategoryDaoTest{
 
     @InjectMocks
-    InMemoryProductDao inMemoryProductDao;
+    InMemoryCategoryDao inMemoryCategoryDao;
 
     @Test
     public void test_save_OK() {
-        Product p = new Product("Tv", "Otros", "TV", 1100);
+        Category c = new Category("Tv", "televisores");
 
-        inMemoryProductDao.save(p);
-        assertEquals(1, inMemoryProductDao.findAll().size());
+        inMemoryCategoryDao.createCategory(c);
+        assertEquals(1, inMemoryCategoryDao.findAllCategory().size());
     }
 }
-

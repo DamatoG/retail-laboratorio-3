@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.1</version>
+		<version>2.6.8</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.utn.lab4.tp-final</groupId>
@@ -15,11 +15,12 @@
 	<description>Trabajo practico final correspondente a la materia Laboratorio de Computacion 3 de la carrera Tecnicatura Universitaria en Programación</description>
 	<properties>
 		<java.version>11</java.version>
-	</properties>|
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+
 		</dependency>
 
 		<dependency>

@@ -60,7 +60,7 @@ public class InMemoryProductDao implements ProductDao {
 
     @Override
     public boolean deleteProduct(String id) {
-        System.out.println("capa de persistencia metodo delete");
+        //System.out.println("capa de persistencia metodo delete");
         for (Product p: productList){
             if(p.getIdProduct().equals(id)){
                 System.out.println("Producto eliminado");

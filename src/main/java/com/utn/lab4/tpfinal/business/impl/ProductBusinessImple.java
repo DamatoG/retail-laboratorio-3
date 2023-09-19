@@ -17,7 +17,7 @@ import java.util.List;
 public class ProductBusinessImple implements BusinessProduct {
 
     @Autowired
-    ProductDao productoDao;
+    ProductDao productDao;
 
     @Autowired
     CategoryDao categoryDao;
@@ -43,44 +43,44 @@ public class ProductBusinessImple implements BusinessProduct {
         }
 
         c.addProductToCategory(product);
-        return this.productoDao.save(product);
+        return this.productDao.save(product);
     }
 
     @Override
     public Product updateProduct(String id, Product p) {
-        if (productoDao.findProductById(id) == null){
-            throw new BadRequestException("El producto con id "+p.getIdProduct()+" no existe");
+        if (productDao.findProductById(id) == null){
+            throw new BadRequestException("El producto con id "+ id +" no existe");
         }
         p.setIdProduct(id);
-        return this.productoDao.updateProduct(p);
+        return this.productDao.updateProduct(p);
     }
 
     @Override
     public boolean deleteProduct(String id) {
-        Category c = categoryDao.findCategoryByName(productoDao.findProductById(id).getCategoryName());
+        Category c = categoryDao.findCategoryByName(productDao.findProductById(id).getCategoryName());
         if (c != null) {
-            c.removeProductToCategory(productoDao.findProductById(id));
-            productoDao.deleteProduct(id);
+            c.removeProductToCategory(productDao.findProductById(id));
+            productDao.deleteProduct(id);
         }
-        this.productoDao.deleteProduct(id);
+        this.productDao.deleteProduct(id);
         return true;
     }
 
     @Override
     public Product getProduct(String id) {
-        return this.productoDao.findProductById(id);
+        return this.productDao.findProductById(id);
     }
 
     @Override
     public List<Product> getProductsByAttribute(String type, String brand, String category) {
-        System.out.println(this.productoDao.filtrarProducts(type, brand, category));
-        return this.productoDao.filtrarProducts(type, brand, category);
+        System.out.println(this.productDao.filtrarProducts(type, brand, category));
+        return this.productDao.filtrarProducts(type, brand, category);
 
     }
 
     @Override
     public ArrayList<Product> getAllProducts() {
-        return this.productoDao.findAll();
+        return this.productDao.findAll();
     }
 
 }

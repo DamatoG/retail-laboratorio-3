@@ -21,13 +21,15 @@ public class Product {
         this.price = price;
     }
 
-    public Product(String name_product, ProductType type, String description_product, String category_name, String brand) {
+    public Product(String name_product, ProductType type, String description_product, String category_name, String brand, int price) {
         this.name_product = name_product;
         this.description_product = description_product;
         this.category_name = category_name;
         this.type = type;
         this.brand = brand;
+        this.price = price;
     }
+
 
     public String getIdProduct() {
         return id_product;

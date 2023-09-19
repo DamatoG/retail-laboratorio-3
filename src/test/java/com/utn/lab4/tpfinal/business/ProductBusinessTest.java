@@ -6,6 +6,7 @@ import com.utn.lab4.tpfinal.model.Category;
 import com.utn.lab4.tpfinal.model.Product;
 import com.utn.lab4.tpfinal.persistence.dao.CategoryDao;
 import com.utn.lab4.tpfinal.persistence.dao.ProductDao;
+import com.utn.lab4.tpfinal.persistence.dao.implementacion.InMemoryCategoryDao;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,7 +26,7 @@ public class ProductBusinessTest {
     private ProductDao productDaoMock;
 
     @Mock
-    private CategoryDao categoryDaoMock;
+    private InMemoryCategoryDao categoryDaoMock;
 
 
     //A businessProductImplementation le inyecto las dependencias categoryDaoMock y categoryDaoMock
@@ -40,8 +41,8 @@ public class ProductBusinessTest {
         Category c = new Category();
         c.setNameCategory("Otros");
 
-        Product p = new Product("Samsung S24", celulares, "Celular s23", "Otros", "celulares");
-        AltaProductDto productoEsperado = new AltaProductDto("Samsung S24", celulares, "Celular s23", "Otros", "celulares");
+        Product p = new Product("Samsung S24", celulares, "Celular s23", "Otros", "celulares", 1000);
+        AltaProductDto productoEsperado = new AltaProductDto("Samsung S24", celulares, "Celular s23", "Otros", "celulares", 1000);
 
         Mockito.when(productDaoMock.save(Mockito.<Product>any())).thenReturn(p);
         Mockito.when(categoryDaoMock.findCategoryByName("Otros")).thenReturn(c);
@@ -52,6 +53,7 @@ public class ProductBusinessTest {
         assertEquals(productoEsperado.getBrand(), resultProduct.getBrand());
         assertEquals(productoEsperado.getType(), resultProduct.getType());
         assertEquals(productoEsperado.getCategory_name(), resultProduct.getCategoryName());
+        assertEquals(productoEsperado.getPrice(), resultProduct.getPrice());
 
     }
 

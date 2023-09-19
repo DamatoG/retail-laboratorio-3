@@ -35,10 +35,7 @@ public class ProductController {
         }
         return ResponseHandler.generateResponse("Datos recuperados con exito", HttpStatus.OK, producto);
     }
-//    @GetMapping("/{id}")
-//    public Product getProducto(@PathVariable String id) {
-//        return businessProduct.getProduct(id);
-//    }
+
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> createProduct(@RequestBody AltaProductDto dto){
@@ -70,10 +67,6 @@ public class ProductController {
 
         return ResponseHandler.generateResponse("El producto "+ id + " fue actualizado con exito", HttpStatus.OK, p);
     }
-    /*@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Product crearProduct(@RequestBody AltaProductDto dto){
-        return this.businessProduct.createProduct(dto);
-    }*/
 
     @GetMapping("/filter")
     public ResponseEntity<Object> getProductByAtribute(

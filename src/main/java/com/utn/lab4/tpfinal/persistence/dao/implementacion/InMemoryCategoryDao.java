@@ -89,38 +89,39 @@ public class InMemoryCategoryDao implements CategoryDao {
         return categoriesNames;
     }
 
-
-
     @Override
     public ArrayList<Category> findAllCategory() {
         return categoriyList;
     }
 
+
     public ArrayList<Product> orderByPrice(String id, String order_price){
         ArrayList<Product> listaOrdenada = new ArrayList<>();
-        //System.out.println(order_price);
 
         for (Category c: categoriyList) {
             if (c.getIdCategory().equals(id)){
                 listaOrdenada = c.getListProduct();
 
                 if (order_price.equals("asc")) {
-                    //System.out.println("asc antes de ordenar" + listaOrdenada);
                     Collections.sort(listaOrdenada, Comparator.comparing(Product::getPrice));
-                    //System.out.println("asc desp de ordenar" + listaOrdenada);
                 }
 
                 else {
-                    //System.out.println("desc antes de ordenar" + listaOrdenada);
-
                     Collections.sort(listaOrdenada, Comparator.comparing(Product::getPrice));
                     Collections.reverse(listaOrdenada);
-                    //System.out.println("desc desp de ordenar" + listaOrdenada);
                 }
             }
 
         }
 
         return listaOrdenada;
+    }
+
+    @Override
+    public ArrayList<Product> getByBrand (String id, String brand){
+        ArrayList<Product> listByBrand = new ArrayList<>();
+
+
+        return listByBrand;
     }
 }

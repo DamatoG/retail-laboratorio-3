@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface BussinesCategory {
 
     Category createCategory (AltaCategoryDto dto);
-    Category updateCategory (Category c);
+    Category updateCategory(String id, Category c);
     boolean deleteCategory (String id);
     Category getCategory (String id);
     ArrayList<Category> getAllCategories();

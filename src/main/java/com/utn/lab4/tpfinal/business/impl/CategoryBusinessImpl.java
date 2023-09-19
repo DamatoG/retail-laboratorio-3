@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 @Component
-public class CategoryBussinesImple implements BussinesCategory {
+public class CategoryBusinessImpl implements BussinesCategory {
 
     @Autowired
     InMemoryCategoryDao dao;
@@ -30,26 +30,16 @@ public class CategoryBussinesImple implements BussinesCategory {
     }
 
     @Override
-    public Category updateCategory(Category c) {
-        if (dao.findCategoryById(c.getIdCategory()) != null) {
+    public Category updateCategory(String id, Category c) {
             dao.updateCategory(c);
             return c;
-        } else {
-            return null;
-        }
     }
 
     @Override
-    public boolean deleteCategory(String id) {
-        dao.deleteCategory(id);
-        return true;
-    }
+    public boolean deleteCategory(String id) {dao.deleteCategory(id);return true;}
 
     @Override
-    public Category getCategory(String id) {
-        return dao.findCategoryById(id);
-
-    }
+    public Category getCategory(String id) {return dao.findCategoryById(id);}
 
     @Override
     public ArrayList<Category> getAllCategories() {
